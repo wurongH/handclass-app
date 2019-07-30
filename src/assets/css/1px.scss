@@ -1,0 +1,91 @@
+/* 1px hack */
+
+@charset "UTF-8";
+@mixin border {
+    content: '';
+    position: absolute;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+
+$bordercolor:#e5e5e5;
+.border-all,
+.border-t,
+.border-r,
+.border-b,
+.border-l {
+    position: relative;
+}
+
+.border-all:after {
+    @include border;
+    top: 0;
+    right: auto;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid $bordercolor;
+}
+
+.border-t:before {
+    @include border;
+    top: 0;
+    left: 0;
+    width: 1px;
+    width: 100%;
+    height: 1px;
+    background-color: $bordercolor;
+}
+
+.border-r:after {
+    @include border;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background-color: $bordercolor;
+    -webkit-transform-origin: right top;
+    transform-origin: right top;
+}
+
+.border-b:after {
+    @include border;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $bordercolor;
+    -webkit-transform-origin: left bottom;
+    transform-origin: left bottom;
+}
+
+.border-l:before {
+    @include border;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background-color: $bordercolor;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    .border-all:after,
+    .border-t:before,
+    .border-b:after {
+        width: 200%;
+    }
+    .border-all:after,
+    .border-l:before,
+    .border-r:after {
+        height: 200%;
+    }
+    .border-all:after,
+    .border-t:before,
+    .border-r:after,
+    .border-b:after,
+    .border-l:before {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+    }
+}
